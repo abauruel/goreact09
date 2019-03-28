@@ -1,6 +1,6 @@
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-injectGlobal`
+const Global = createGlobalStyle`
 * {
     margin: 0;
     padding:0;
@@ -13,10 +13,14 @@ html, body, #root {
   height: 100%;
 }
 
-body{
+body {
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
+  font-family: 'Montserrat', sans-serif;
   background: #181818;
-  font-family: 'Montserrat', sans-serif
+  color: #FFFFFF;
+
 }
+
 `;
+export default Global;

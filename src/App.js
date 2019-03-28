@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import './styles/global';
+import React from 'react';
+import Global from './styles/global';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello World</h1>
-      </div>
-    );
-  }
-}
+import Sidebar from './components/Sidebar';
+
+const App = () => (
+  <div>
+    <Global />
+    <Sidebar />
+  </div>
+);
 
 export default App;
