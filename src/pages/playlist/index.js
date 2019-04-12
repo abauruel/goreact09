@@ -1,87 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { Creators as PlayListsDetailsActions } from '../../store/ducks/playlistsDetails';
+
+import Loading from '../../components/Loading';
 
 import { Container, Header, SongList } from './styles';
 
 import ClockIcon from '../../assets/images/clock.svg';
 import PlusIcon from '../../assets/images/plus.svg';
 
-const Playlist = () => (
-  <Container>
-    <Header>
-      <img
-        src="http://designontherocks.blog.br/wp-content/uploads/2010/07/typoster2.jpg"
-        alt="cover"
-      />
+class Playlist extends Component {
+  componentDidMount() {
+    this.loadPlaylistDetails();
+  }
 
-      <div>
-        <span>PLAYLIST</span>
-        <h1>Rock forever</h1>
-        <p>13 musicas</p>
+  loadPlaylistDetails = () => {
+    const { id } = this.props.match.params;
+    this.props.getPlaylistDetailsRequest(id);
+  };
 
-        <button>PLAY</button>
-      </div>
-    </Header>
+  renderDetails = () => (
+    <Container>
+      <Header>
+        <img
+          src="http://designontherocks.blog.br/wp-content/uploads/2010/07/typoster2.jpg"
+          alt="cover"
+        />
 
-    <SongList cellPadding={0} cellSpacing={0}>
-      <thead>
-        <th />
-        <th>Título</th>
-        <th>Artista</th>
-        <th>Album</th>
-        <th>
-          <img src={ClockIcon} alt="Duração" />
-        </th>
-      </thead>
+        <div>
+          <span>PLAYLIST</span>
+          <h1>Rock forever</h1>
+          <p>13 musicas</p>
 
-      <tbody>
-        <tr>
-          <td>
-            <img src={PlusIcon} alt="Adicionar" />
-          </td>
-          <td>Pappercut</td>
-          <td>Linkin Park</td>
-          <td>Hybrid Theory</td>
-          <td>3:26</td>
-        </tr>
-        <tr>
-          <td>
-            <img src={PlusIcon} alt="Adicionar" />
-          </td>
-          <td>Pappercut</td>
-          <td>Linkin Park</td>
-          <td>Hybrid Theory</td>
-          <td>3:26</td>
-        </tr>
-        <tr>
-          <td>
-            <img src={PlusIcon} alt="Adicionar" />
-          </td>
-          <td>Pappercut</td>
-          <td>Linkin Park</td>
-          <td>Hybrid Theory</td>
-          <td>3:26</td>
-        </tr>
-        <tr>
-          <td>
-            <img src={PlusIcon} alt="Adicionar" />
-          </td>
-          <td>Pappercut</td>
-          <td>Linkin Park</td>
-          <td>Hybrid Theory</td>
-          <td>3:26</td>
-        </tr>
-        <tr>
-          <td>
-            <img src={PlusIcon} alt="Adicionar" />
-          </td>
-          <td>Pappercut</td>
-          <td>Linkin Park</td>
-          <td>Hybrid Theory</td>
-          <td>3:26</td>
-        </tr>
-      </tbody>
-    </SongList>
-  </Container>
-);
+          <button>PLAY</button>
+        </div>
+      </Header>
 
-export default Playlist;
+      <SongList cellPadding={0} cellSpacing={0}>
+        <thead>
+          <th />
+          <th>Título</th>
+          <th>Artista</th>
+          <th>Album</th>
+          <th>
+            <img src={ClockIcon} alt="Duração" />
+          </th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+              <img src={PlusIcon} alt="Adicionar" />
+            </td>
+            <td>Pappercut</td>
+            <td>Linkin Park</td>
+            <td>Hybrid Theory</td>
+            <td>3:26</td>
+          </tr>
+        </tbody>
+      </SongList>
+    </Container>
+  );
+
+  render() {
+    return this.props.playlistsDetails.loading ? (
+      <Container loading>
+        <Loading />
+      </Container>
+    ) : (
+      this.renderDetails()
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  playlistsDetails: state.playlistsDetails,
+});
+const mapDispatchToProps = dispatch => bindActionCreators(PlayListsDetailsActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Playlist);
