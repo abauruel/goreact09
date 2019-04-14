@@ -21,6 +21,9 @@ body {
   background: #181818;
   color: #FFFFFF;
 
+  button{
+    cursor: pointer
+  }
 }
 
 `;
