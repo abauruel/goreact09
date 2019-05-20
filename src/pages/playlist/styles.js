@@ -65,7 +65,8 @@ export const SongList = styled.table`
   text-align: left;
   margin-top: 20px;
 
-  thead th {
+  thead,
+  th {
     font-size: 11px;
     color: #b3b3b3;
     letter-spacing: 1.11px;

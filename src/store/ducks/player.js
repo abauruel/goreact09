@@ -19,5 +19,5 @@ export default function player(state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-  loadSong: song => ({ type: Types.LOAD, playload: { song } }),
+  loadSong: song => ({ type: Types.LOAD, payload: { song } }),
 };
