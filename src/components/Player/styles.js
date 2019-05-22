@@ -5,11 +5,12 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #181818;
+  background: #282828;
   padding: 25px;
 `;
 
 export const Current = styled.div`
+  width: 220px;
   display: flex;
   align-items: center;
 
